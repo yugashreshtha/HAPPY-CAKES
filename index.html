@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HAPPY CAKES (HOME MADE) | Premium Bakery</title>
+  <meta name="description" content="A premium dark bakery website for HAPPY CAKES (HOME MADE), designed to feel minimal, elegant, and mobile-first." />
+  <meta name="theme-color" content="#08090d" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#07080c;
+      --bg-2:#0c0f15;
+      --card:rgba(255,255,255,.07);
+      --card-2:rgba(255,255,255,.05);
+      --line:rgba(255,255,255,.11);
+      --text:#f6f3ee;
+      --muted:rgba(246,243,238,.68);
+      --soft:rgba(246,243,238,.48);
+      --gold:#f1cf9a;
+      --gold-2:#c89458;
+      --shadow:0 24px 70px rgba(0,0,0,.34);
+      --radius:28px;
+      --ease:cubic-bezier(.22,.9,.2,1);
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Manrope',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 12%, rgba(241,207,154,.14), transparent 24%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,.08), transparent 18%),
+        linear-gradient(180deg, #06070b 0%, #0b0d13 55%, #090b10 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:-10%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.04), transparent 28%),
+        linear-gradient(120deg, rgba(255,255,255,.03), transparent 34%, rgba(255,255,255,.02) 60%, transparent 78%);
+      filter:blur(34px);
+      pointer-events:none;
+      z-index:-1;
+      animation:drift 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift {
+      from{transform:translate3d(-1.5%,0,0) scale(1)}
+      to{transform:translate3d(1.5%,-1.2%,0) scale(1.03)}
+    }
+
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+
+    .shell{width:min(calc(100% - 24px), var(--max));margin:0 auto}
+
+    .glass{
+      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.045));
+      border:1px solid var(--line);
+      backdrop-filter:blur(20px);
+      -webkit-backdrop-filter:blur(20px);
+      box-shadow:var(--shadow);
+    }
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:40;
+      padding:14px 0 0;
+    }
+
+    .nav{
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:12px;
+      padding:10px 12px;
+      border-radius:999px;
+    }
+
+    .mark{
+      width:42px;height:42px;border-radius:50%;display:grid;place-items:center;flex:none;
+      border:1px solid rgba(241,207,154,.28);
+      background:radial-gradient(circle at 30% 30%, rgba(241,207,154,.24), rgba(255,255,255,.03));
+      color:var(--gold);
+      font-family:'Cormorant Garamond', serif;
+      font-size:1.35rem;
+      letter-spacing:.08em;
+    }
+
+    .brand{
+      min-width:0;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .brand-copy{min-width:0}
+    .brand-title{
+      font-size:.88rem;
+      font-weight:800;
+      letter-spacing:.12em;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brand-sub{
+      font-size:.72rem;
+      color:var(--soft);
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+
+    .nav-links{
+      display:none;
+      justify-content:center;
+      gap:22px;
+      color:var(--muted);
+      font-size:.9rem;
+    }
+
+    .nav-links a{transition:color .3s var(--ease)}
+    .nav-links a:hover{color:var(--text)}
+
+    .btn,
+    .menu-btn{
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(255,255,255,.11), rgba(255,255,255,.05));
+      color:var(--text);
+      border-radius:999px;
+      min-height:44px;
+      padding:0 16px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      font-weight:700;
+      font-size:.92rem;
+      transition:transform .35s var(--ease), border-color .35s var(--ease), background .35s var(--ease);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+    }
+
+    .btn:hover,.menu-btn:hover{transform:translateY(-2px);border-color:rgba(241,207,154,.26)}
+
+    .btn.primary{
+      color:#21170d;
+      background:linear-gradient(135deg, #fff6e7 0%, #f1cf9a 42%, #c89458 100%);
+      box-shadow:0 16px 36px rgba(200,148,88,.22);
+    }
+
+    .menu-btn{width:44px;padding:0;display:grid;place-items:center}
+    .menu-btn span,.menu-btn::before,.menu-btn::after{
+      content:"";
+      display:block;
+      width:18px;height:2px;border-radius:999px;background:#f6f3ee;
+      transition:transform .35s var(--ease), opacity .35s var(--ease);
+    }
+    .menu-btn::before{transform:translateY(-6px)}
+    .menu-btn::after{transform:translateY(6px)}
+    .menu-btn span{margin-top:-2px}
+    .menu-btn.active span{opacity:0}
+    .menu-btn.active::before{transform:rotate(45deg) translate(1px,1px)}
+    .menu-btn.active::after{transform:rotate(-45deg) translate(1px,-1px)}
+
+    .mobile-panel{
+      margin-top:10px;
+      border-radius:24px;
+      overflow:hidden;
+      max-height:0;
+      opacity:0;
+      transform:translateY(-8px);
+      transition:max-height .4s var(--ease), opacity .3s var(--ease), transform .3s var(--ease), padding .3s var(--ease);
+      padding:0 16px;
+    }
+    .mobile-panel.open{max-height:220px;opacity:1;transform:translateY(0);padding:12px 16px}
+    .mobile-panel a{display:block;padding:12px 2px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.07)}
+    .mobile-panel a:last-child{border-bottom:none}
+
+    section{padding:16px 0}
+
+    .hero{padding:26px 0 18px}
+    .hero-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:34px;
+      padding:22px;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(120deg, rgba(255,255,255,.08), transparent 30%, transparent 68%, rgba(255,255,255,.04)),
+        radial-gradient(circle at 82% 18%, rgba(241,207,154,.12), transparent 22%);
+      pointer-events:none;
+    }
+
+    .hero-grid{display:grid;gap:18px;align-items:center}
+
+    .mini-tag{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      padding:9px 13px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.11);
+      color:var(--muted);
+      font-size:.74rem;
+      text-transform:uppercase;
+      letter-spacing:.22em;
+      margin-bottom:16px;
+    }
+    .mini-tag::before{
+      content:"";
+      width:7px;height:7px;border-radius:50%;
+      background:linear-gradient(135deg, #fff6e8, #e0ab61);
+      box-shadow:0 0 16px rgba(241,207,154,.44);
+    }
+
+    h1{
+      margin:0;
+      font-family:'Cormorant Garamond', serif;
+      font-weight:700;
+      font-size:clamp(3rem, 11vw, 5.7rem);
+      line-height:.92;
+      letter-spacing:-.04em;
+      max-width:10ch;
+    }
+
+    .hero-copy{
+      margin:14px 0 0;
+      max-width:34ch;
+      color:var(--muted);
+      font-size:.98rem;
+      line-height:1.7;
+    }
+
+    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+
+    .info-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .info-pill{
+      padding:10px 13px;
+      border-radius:999px;
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.08);
+      color:var(--muted);
+      font-size:.84rem;
+    }
+
+    .hero-visual{
+      position:relative;
+      min-height:360px;
+      display:grid;
+      place-items:center;
+    }
+
+    .main-photo,
+    .small-photo{
+      position:absolute;
+      overflow:hidden;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 24px 60px rgba(0,0,0,.34);
+      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+    }
+
+    .main-photo{
+      width:min(82vw,340px);
+      height:380px;
+      left:50%;top:0;
+      transform:translateX(-50%) rotate(-4deg);
+    }
+
+    .small-photo{
+      width:138px;
+      height:156px;
+      right:0;
+      bottom:18px;
+      transform:rotate(6deg);
+    }
+
+    .main-photo img,.small-photo img{width:100%;height:100%;object-fit:cover;transform:scale(1.04)}
+
+    .photo-tag{
+      position:absolute;
+      left:14px;right:14px;bottom:14px;
+      padding:12px 14px;
+      border-radius:20px;
+      background:linear-gradient(180deg, rgba(8,9,12,.28), rgba(8,9,12,.62));
+      border:1px solid rgba(255,255,255,.12);
+      font-size:.9rem;
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+    }
+
+    .section-top{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:14px;
+    }
+
+    .section-top h2{
+      margin:0;
+      font-family:'Cormorant Garamond', serif;
+      font-size:clamp(2rem, 7vw, 3.2rem);
+      line-height:.94;
+      letter-spacing:-.03em;
+    }
+
+    .section-top p{margin:0;color:var(--muted);font-size:.94rem}
+
+    .grid{display:grid;gap:12px}
+
+    .showcase-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .showcase-card,
+    .review-card,
+    .visit-card,
+    .stat-card{
+      padding:16px;
+      border-radius:26px;
+    }
+
+    .showcase-card{
+      min-height:200px;
+      display:flex;
+      flex-direction:column;
+      justify-content:end;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .showcase-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, transparent 25%, rgba(7,8,12,.84) 100%);
+      z-index:1;
+    }
+
+    .showcase-card img{
+      position:absolute;
+      inset:0;
+      width:100%;height:100%;object-fit:cover;
+      transition:transform .7s var(--ease);
+    }
+    .showcase-card:hover img{transform:scale(1.06)}
+    .showcase-card .label{position:relative;z-index:2;font-size:1rem;font-weight:700}
+    .showcase-card .sub{position:relative;z-index:2;color:rgba(246,243,238,.72);font-size:.85rem;margin-top:5px}
+
+    .reviews-grid{grid-template-columns:1fr;gap:12px}
+
+    .stat-card b{
+      display:block;
+      font-family:'Cormorant Garamond', serif;
+      font-size:clamp(2.5rem, 10vw, 4rem);
+      line-height:.9;
+      margin-bottom:8px;
+    }
+    .stat-card p,.review-card p,.visit-card p{margin:0;color:var(--muted);line-height:1.65;font-size:.93rem}
+    .review-card h3,.visit-card h3{margin:0 0 6px;font-size:1rem}
+
+    .stars{display:flex;gap:6px;margin-bottom:14px}
+    .star{
+      width:18px;height:18px;
+      background:linear-gradient(180deg, #fff2d4, #dca559);
+      clip-path:polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      box-shadow:0 4px 14px rgba(220,165,89,.24);
+    }
+
+    .visit-grid{grid-template-columns:1fr;gap:12px}
+
+    .map-wrap{
+      min-height:320px;
+      border-radius:26px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.1);
+      box-shadow:var(--shadow);
+    }
+    .map-wrap iframe{width:100%;height:100%;min-height:320px;border:0;filter:grayscale(.94) contrast(1.05) brightness(.88)}
+
+    .meta-list{display:grid;gap:8px;margin-top:14px}
+    .meta-item{
+      padding:11px 12px;
+      border-radius:16px;
+      background:rgba(255,255,255,.035);
+      border:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+      font-size:.88rem;
+    }
+
+    .footer{padding:18px 0 34px}
+    .footer-card{
+      border-radius:24px;
+      padding:16px 18px;
+      color:var(--soft);
+      font-size:.84rem;
+      text-align:center;
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(22px) scale(.985);
+      transition:opacity .75s var(--ease), transform .75s var(--ease);
+    }
+    .reveal.in{opacity:1;transform:translateY(0) scale(1)}
+
+    @media (min-width:760px){
+      .hero-card{padding:28px}
+      .hero-grid{grid-template-columns:1.02fr .98fr;gap:24px}
+      .reviews-grid{grid-template-columns:1.08fr .92fr .92fr}
+      .visit-grid{grid-template-columns:.95fr 1.05fr}
+    }
+
+    @media (min-width:1024px){
+      .nav-links{display:flex}
+      .menu-btn,.mobile-panel{display:none}
+      .showcase-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+      .reveal{opacity:1;transform:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell">
+      <nav class="nav glass" aria-label="Primary navigation">
+        <a href="#home" class="brand" aria-label="Go to top">
+          <div class="mark">HC</div>
+          <div class="brand-copy">
+            <div class="brand-title">HAPPY CAKES</div>
+            <div class="brand-sub">Home Made</div>
+          </div>
+        </a>
+
+        <div class="nav-links">
+          <a href="#menu">Menu</a>
+          <a href="#reviews">Reviews</a>
+          <a href="#visit">Visit</a>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:10px;justify-content:flex-end;">
+          <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=22.7505928,88.4084972" target="_blank" rel="noopener">Directions</a>
+          <button class="menu-btn" type="button" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+        </div>
+      </nav>
+
+      <div class="mobile-panel glass" id="mobilePanel">
+        <a href="#menu">Menu</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#visit">Visit</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="shell">
+        <div class="hero-card glass reveal in">
+          <div class="hero-grid">
+            <div>
+              <div class="mini-tag">Dark luxury bakery</div>
+              <h1>Minimal. Rich. Delicious.</h1>
+              <p class="hero-copy">A cleaner premium look for <strong>HAPPY CAKES (HOME MADE)</strong> — crafted for mobile, local trust, and a polished first impression.</p>
+
+              <div class="info-pills">
+                <div class="info-pill">4.7 rating</div>
+                <div class="info-pill">Open 24 Hrs</div>
+                <div class="info-pill">Delivery & takeaway</div>
+              </div>
+
+              <div class="hero-actions">
+                <a class="btn primary" href="#visit">Visit Bakery</a>
+                <a class="btn" href="#reviews">See Reviews</a>
+              </div>
+            </div>
+
+            <div class="hero-visual" aria-hidden="true">
+              <div class="main-photo">
+                <img src="https://content.jdmagicbox.com/comp/kolkata/y2/033pxx33.xx33.221020051933.e8y2/catalogue/happy-cake-kolkata-cake-shops-76l77t8ua1.jpg"
+                     alt="Cake display"
+                     onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=1200&q=80';">
+                <div class="photo-tag">Elegant cakes & sweet bakes</div>
+              </div>
+              <div class="small-photo">
+                <img src="https://content.jdmagicbox.com/comp/kolkata/y2/033pxx33.xx33.221020051933.e8y2/catalogue/happy-cake-kolkata-cake-shops-8x4osxeaem.jpg"
+                     alt="Custom cake"
+                     onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80';">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu">
+      <div class="shell">
+        <div class="section-top reveal">
+          <h2>Selected menu</h2>
+          <p>Simple, premium, easy to scan.</p>
+        </div>
+
+        <div class="grid showcase-grid">
+          <article class="showcase-card glass reveal">
+            <img src="https://images.unsplash.com/photo-1464306076886-da185f6a9d05?auto=format&fit=crop&w=1200&q=80" alt="Celebration cakes" />
+            <div class="label">Celebration Cakes</div>
+            <div class="sub">Birthdays • anniversaries • events</div>
+          </article>
+
+          <article class="showcase-card glass reveal">
+            <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=1200&q=80" alt="Pastries" />
+            <div class="label">Pastries</div>
+            <div class="sub">Soft, fresh, indulgent</div>
+          </article>
+
+          <article class="showcase-card glass reveal">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80" alt="Fresh bakes" />
+            <div class="label">Fresh Bakes</div>
+            <div class="sub">Bread • cookies • sweet treats</div>
+          </article>
+
+          <article class="showcase-card glass reveal">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1200&q=80" alt="Custom orders" />
+            <div class="label">Custom Orders</div>
+            <div class="sub">Made for special moments</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews">
+      <div class="shell">
+        <div class="section-top reveal">
+          <h2>Customer trust</h2>
+          <p>Clean and convincing.</p>
+        </div>
+
+        <div class="grid reviews-grid">
+          <article class="stat-card glass reveal">
+            <div class="stars" aria-label="4.7 out of 5 stars">
+              <span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star" style="opacity:.84"></span>
+            </div>
+            <b>4.7 / 5</b>
+            <p>Based on the public rating footprint visible online.</p>
+          </article>
+
+          <article class="review-card glass reveal">
+            <h3>Custom cake appeal</h3>
+            <p>Ideal for birthdays, anniversaries, and celebration orders.</p>
+          </article>
+
+          <article class="review-card glass reveal">
+            <h3>Easy ordering</h3>
+            <p>Delivery, takeaway, and home delivery help convert fast.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="visit">
+      <div class="shell">
+        <div class="section-top reveal">
+          <h2>Visit locally</h2>
+          <p>Suryapur / Barrackpore</p>
+        </div>
+
+        <div class="grid visit-grid">
+          <article class="visit-card glass reveal">
+            <h3>HAPPY CAKES (HOME MADE)</h3>
+            <p>P.S. Suryapur, Taltala, near Barpara Play Ground, Barrackpore, West Bengal.</p>
+
+            <div class="meta-list">
+              <div class="meta-item">Open 24 Hrs</div>
+              <div class="meta-item">Delivery • Takeaway • Home Delivery</div>
+              <div class="meta-item">Best for custom cakes & sweet bakes</div>
+            </div>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="https://www.google.com/maps/search/?api=1&query=22.7505928,88.4084972" target="_blank" rel="noopener">Open Maps</a>
+            </div>
+          </article>
+
+          <div class="map-wrap reveal glass">
+            <iframe
+              title="Map showing HAPPY CAKES (HOME MADE)"
+              src="https://www.google.com/maps?q=22.7505928,88.4084972&z=17&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell">
+      <div class="footer-card glass reveal">ZWD © Made By Yugashreshtha Das</div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.querySelector('.menu-btn');
+    const mobilePanel = document.getElementById('mobilePanel');
+
+    if (menuBtn && mobilePanel) {
+      menuBtn.addEventListener('click', () => {
+        const isOpen = mobilePanel.classList.toggle('open');
+        menuBtn.classList.toggle('active', isOpen);
+        menuBtn.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      mobilePanel.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobilePanel.classList.remove('open');
+          menuBtn.classList.remove('active');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    const revealItems = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -30px 0px' });
+
+    revealItems.forEach((item, index) => {
+      if (!item.classList.contains('in')) {
+        item.style.transitionDelay = `${Math.min(index * 45, 260)}ms`;
+        io.observe(item);
+      }
+    });
+  </script>
+</body>
+</html>
